@@ -1,0 +1,173 @@
+<!--
+Page to display the survey form. The fields will be validated upon submission and recored will be saved.
+Futher, based on raffle field winner will be decided.
+Author: Prasanna Venkatesh Parthasarathy
+ -->
+<html xmlns="http://www.w3.org/1999/html" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Survey Form</title>
+<style type="text/css">
+.heading, .links
+{
+	width: 700px;
+	margin: 0px auto;
+	border-bottom: 1px solid gray;
+	margin-bottom: 20px;
+}
+.error
+{
+	color: red;
+	font-style: italic;
+	font-size: 12px;
+}
+.tableInside
+{
+}
+
+.ui-panelgrid td, .ui-panelgrid tr
+{
+    border-style: none !important;
+    font-size: 14px;
+}
+</style>
+</h:head>
+<h:body>
+<div class="heading">
+<h2> Student Survey Form: </h2>
+</div>
+<div class="links">
+
+	<h:form id="surveyForm">
+		<p:panelGrid columns = "3" style="border: 0px;">
+		
+			<p:outputLabel for="firstName" value="First Name:"></p:outputLabel>
+			
+			<p:inputText id="firstName" value="#{Student.firstName}" required="true" requiredMessage="Required Field." 
+			validatorMessage="Only alphabets are allowed and maximum allowed length is 15">
+				<f:validateLength maximum="15"></f:validateLength>
+				<f:validateRegex pattern="[a-zA-Z]+"></f:validateRegex>
+			</p:inputText>
+			<p:message for="firstName"></p:message>
+			
+			<p:outputLabel for="lastName" value="Last Name:"></p:outputLabel>
+			<p:inputText id="lastName" value="#{Student.lastName}" required="true" requiredMessage="Required Field." 
+			validatorMessage="Only alphabets are allowed and maximum allowed length is 15">
+				<f:validateLength maximum="15"></f:validateLength>
+				<f:validateRegex pattern="[a-zA-Z]+"></f:validateRegex>
+			</p:inputText>
+			<p:message for="lastName" />
+			
+			<p:outputLabel for="streetAddress" value="Street Address:" ></p:outputLabel>
+			<p:inputText id="streetAddress" value="#{Student.streetAddress}" required="true" requiredMessage="Required Field." 
+			validatorMessage="Allowed characters are alphabets,numbers and spaces. Maximum allowed length: 30 characters">
+				<f:validateLength maximum="30"></f:validateLength>
+				<f:validateRegex pattern="[ A-Za-z0-9]*"></f:validateRegex>
+			</p:inputText>
+			<p:message for="streetAddress"/>
+			
+			<p:outputLabel for="zip" value="Zip:" ></p:outputLabel>
+			<p:selectOneMenu id="zip" value="#{Student.zip}" required="true" requiredMessage="Required Field."
+			validatorMessage="Only numbers are allowed and should exactly contain 5 digits">
+				<f:selectItem itemLabel="Please Select"></f:selectItem>
+				<f:selectItem itemValue="22312" itemLabel="22312"></f:selectItem>
+				<f:selectItem itemValue="22030" itemLabel="22030"></f:selectItem>
+				<f:selectItem itemValue="22301" itemLabel="22301"></f:selectItem>
+				<f:selectItem itemValue="20148" itemLabel="20148"></f:selectItem>
+				<f:ajax render="city state"></f:ajax>
+			</p:selectOneMenu>
+			<p:message for="zip" />
+			
+			<p:outputLabel for="city" value="City:" ></p:outputLabel>
+				<p:inputText id="city" value="#{Student.city}" required="true" requiredMessage="Required Field." 
+			validatorMessage="Allowed characters are alphabets. Maximum allowed length: 30 characters">
+				<f:validateLength maximum="30"></f:validateLength>
+				<f:validateRegex pattern="[ A-Za-z]*"></f:validateRegex>
+			</p:inputText>
+			<p:message for="city"/>
+			
+			<p:outputLabel for="state" value="State:" ></p:outputLabel>
+			<p:inputText id="state" value="#{Student.state}" required="true" requiredMessage="Required Field." 
+			validatorMessage="Allowed characters are alphabets. Maximum allowed length: 30 characters">
+				<f:validateLength maximum="30"></f:validateLength>
+				<f:validateRegex pattern="[ A-Za-z]*"></f:validateRegex>
+			</p:inputText>
+			<p:message for="state" />
+			
+			<p:outputLabel for="telephoneNo" value="Telephone No:" ></p:outputLabel>
+			<p:inputMask mask="(999) 999-9999" id="telephoneNo" value="#{Student.telephoneNo}" required="true" requiredMessage="Missing or incomplete phone no">
+			</p:inputMask>
+			<p:message for="telephoneNo"/>
+			
+		
+			<p:outputLabel for="email" value="Email:" ></p:outputLabel>
+			<p:inputText id="email" value="#{Student.email}" required="true" requiredMessage="Required Field."
+			validatorMessage="Invalid email address.">
+				<f:validateRegex pattern="[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+"></f:validateRegex>
+			</p:inputText>
+			<p:message for="email" />
+			
+			<p:outputLabel for="dateOfSurvey" value="Date of Survey:" ></p:outputLabel>
+			<p:calendar id="dateOfSurvey" value="#{Student.dateOfSurvey}" required="true" requiredMessage="Required Field." >
+			</p:calendar>
+			<p:message for="dateOfSurvey" />
+			
+			<p:outputLabel for="dateOfJoining" value="Semester Start Date:" ></p:outputLabel>
+			<p:calendar id="dateOfJoining" value="#{Student.dateOfJoining}" required="true" requiredMessage="Required Field." >
+			</p:calendar>
+			<p:message for="dateOfJoining" />
+			
+			</p:panelGrid>
+			
+			<p:panelGrid columns = "2" styleClass="tableInside">
+			<p:outputLabel for="likesCampus">What do you like most in campus?</p:outputLabel>
+			
+			<p:selectManyCheckbox id="likesCampus" value="#{Student.likesCampus}">
+				<f:selectItem itemValue="Students" itemLabel="Students"></f:selectItem>
+				<f:selectItem itemValue="Location" itemLabel="Location"></f:selectItem>
+				<f:selectItem itemValue="Campus" itemLabel="Campus"></f:selectItem>
+				<f:selectItem itemValue="Atmosphere" itemLabel="Atmosphere"></f:selectItem>
+				<f:selectItem itemValue="Dorm Rooms" itemLabel="Dorm Rooms"></f:selectItem>
+				<f:selectItem itemValue="Sports" itemLabel="Sports"></f:selectItem>
+			</p:selectManyCheckbox>
+			
+			
+			<p:outputLabel for="interestUniversity">How did you get interest in the university?</p:outputLabel>
+			<p:selectOneRadio id="interestUniversity" value="#{Student.interestUniversity}">
+				<f:selectItem itemValue="Friends" itemLabel="Friends"></f:selectItem>
+				<f:selectItem itemValue="Television" itemLabel="Television"></f:selectItem>
+				<f:selectItem itemValue="Internet" itemLabel="Internet"></f:selectItem>
+				<f:selectItem itemValue="Other" itemLabel="Other"></f:selectItem>
+			</p:selectOneRadio>
+			
+			</p:panelGrid>
+			
+			<p:panelGrid columns = "3" styleClass="tableInside">
+				<p:outputLabel for="recommendUniversity">Would you like to recommend this school to others?</p:outputLabel>
+				<p:autoComplete forceSelection="true" completeMethod="#{Student.completeRecommend}" id="recommendUniversity"
+				required="true" requiredMessage="You must choose a value" value="#{Student.recommendUniversity}">
+				</p:autoComplete>
+				<p:message for="recommendUniversity" />
+			
+			
+			<p:outputLabel for="raffle">Raffle (Enter 10 comma separated Numbers):</p:outputLabel>
+			<p:inputText id="raffle" value="#{Student.raffle}"></p:inputText>
+			<p:message for="raffle" />
+			
+	   		<p:outputLabel for="comments">Comments:</p:outputLabel>
+			<p:inputTextarea id="comments" value="#{Student.comments}"></p:inputTextarea>
+			<p:message for="comments" />
+
+			
+			<f:facet name = "footer">
+	      		<h:panelGroup style = "display:block; text-align:center">
+	      			<p:button  value="cancel"></p:button>
+	         		<p:commandButton ajax="false" action="#{Student.submitSurvey}" style="margin-left: 20px" id = "submit" value = "Submit" ></p:commandButton>
+	      		</h:panelGroup>
+	   		</f:facet>
+	   		
+	   		</p:panelGrid>
+		
+	</h:form>
+</div>
+</h:body>
+</html>

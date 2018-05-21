@@ -1,0 +1,123 @@
+<!--
+Page to List the Survey Records.
+Author: Prasanna Venkatesh Parthasarathy
+ -->
+
+<html xmlns="http://www.w3.org/1999/html" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Survey Form</title>
+<style type="text/css">
+.heading, .links
+{
+	margin: 0px auto;
+	
+	padding: 5px;
+	width: 1400px;
+	overflow: auto;
+	
+}
+
+.links
+{
+	margin: 0px auto;
+	
+	padding: 5px;
+	width: 1400px;
+	
+}
+
+.mainTable {
+border: 1px solid gray;
+margin-top: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	border-spacing: 2px;
+    border-collapse: collapase;
+}
+
+.mainTable td
+{
+	padding: 5px;
+	min-width: 100px;
+	
+	 border-collapse: collapse;
+}
+
+.mainTable tr{
+border: 1px solid black;
+border-collapse: collapse;
+}
+
+.headingTable {
+	font-family: sans-serif;
+	font-weight: bold;
+	font-size: 14px;
+	color: black;
+	background-color: lightblue;
+	text-align: center; 
+}
+
+.even {
+	font-family: sans-serif;
+	font-size: 13px;
+	color: black;
+	background-color: white;
+	padding: 2px;
+}
+.odd {
+	font-family: sans-serif;
+	font-size: 13px;
+	color: black;
+	background-color: lightgray;
+	padding: 2px;
+}
+
+
+</style>
+<script type="text/javascript">
+function setHiddenVal(val)
+{
+	alert(val)
+	alert(document.getElementById("hidden_guy").value)
+	alert("this:" +val)
+	document.getElementById("hidden_guy").value = val;
+	alert(document.getElementById("hidden_guy").value)
+}
+</script>
+</h:head>
+<h:body>
+	<div class="heading">
+	<h:form id="surser">
+		
+		<h3 style="text-align: center">Search Results:</h3>
+		<h:dataTable var="survey" value="#{SearchBean.surveyList}" border="0" styleClass="mainTable" rowClasses="odd,even,odd,even" headerClass="headingTable" >
+			
+				<h:column><f:facet name="header">First Name</f:facet>#{survey.firstName}</h:column>
+				<h:column><f:facet name="header">Last Name</f:facet>#{survey.lastName}</h:column>
+				<h:column><f:facet name="header">Street Address</f:facet>#{survey.streetAddress}</h:column>
+				<h:column><f:facet name="header">City</f:facet>#{survey.city}</h:column>
+				<h:column><f:facet name="header">State</f:facet>#{survey.state}</h:column>
+				<h:column><f:facet name="header">Zip</f:facet>#{survey.zip}</h:column>
+				<h:column><f:facet name="header">Telephone No</f:facet>#{survey.telephoneNo}</h:column>
+				<h:column><f:facet name="header">Email</f:facet>#{survey.email}</h:column>
+				<h:column><f:facet name="header">Date of Survey</f:facet>#{survey.dateOfSurvey}</h:column>
+				<h:column><f:facet name="header">Likes in Campus</f:facet>#{survey.likesCampusToStore}</h:column>
+				<h:column><f:facet name="header">How got interested</f:facet>#{survey.interestUniversity}</h:column>
+				<h:column><f:facet name="header">Recommend University</f:facet>#{survey.recommendUniversity}</h:column>
+				<h:column><f:facet name="header">Comments</f:facet>#{survey.comments}</h:column>
+	
+				<h:column><f:facet name="header">Actions</f:facet>
+				<h:commandButton action="#{SearchBean.deleteSurvey}" style="margin-left: 20px"  value = "Delete" >
+					<f:setPropertyActionListener target="#{SearchBean.idToDel}" value="#{survey.id}" />
+				</h:commandButton></h:column>
+			
+		</h:dataTable>
+		</h:form>
+	</div>
+	<div class="links">
+		<a href="index.xhtml" style="margin:auto">Home</a>
+		<p> (tip: scroll to last column for delete action--) </p>
+	</div>
+	
+</h:body>
+</html>

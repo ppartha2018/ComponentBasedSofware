@@ -1,0 +1,157 @@
+<!--
+Page to display the survey form. The fields will be validated upon submission and recored will be saved.
+Futher, based on raffle field winner will be decided.
+Author: Prasanna Venkatesh Parthasarathy
+ -->
+<html xmlns="http://www.w3.org/1999/html" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Survey Form</title>
+<style type="text/css">
+.heading, .links
+{
+	width: 600px;
+	margin: 0px auto;
+	border-bottom: 1px solid gray;
+	margin-bottom: 20px;
+}
+.error
+{
+	color: red;
+	font-style: italic;
+	font-size: 12px;
+}
+.tableInside
+{
+}
+</style>
+</h:head>
+<h:body>
+<div class="heading">
+<h2> Student Survey Form: </h2>
+</div>
+<div class="links">
+	<h:form>
+		<h:panelGrid columns = "3"  cellpadding = "7" cellspacing = "1">
+		
+			
+			<h:outputLabel value="First Name:*" />
+			<h:inputText id="firstName" value="#{Student.firstName}" required="true" requiredMessage="Required Field." 
+			validatorMessage="Only alphabets are allowed and maximum allowed length is 15">
+				<f:validateLength maximum="15"></f:validateLength>
+				<f:validateRegex pattern="[a-zA-Z]+"></f:validateRegex>
+			</h:inputText>
+			<h:message for="firstName" class="error" />
+			
+			<h:outputLabel value="Last Name*:" />
+			<h:inputText id="lastName" value="#{Student.lastName}" required="true" requiredMessage="Required Field." 
+			validatorMessage="Only alphabets are allowed and maximum allowed length is 15">
+				<f:validateLength maximum="15"></f:validateLength>
+				<f:validateRegex pattern="[a-zA-Z]+"></f:validateRegex>
+			</h:inputText>
+			<h:message for="lastName" class="error" />
+			
+			<h:outputLabel value="Street Address*:" />
+			<h:inputText id="streetAddress" value="#{Student.streetAddress}" required="true" requiredMessage="Required Field." 
+			validatorMessage="Allowed characters are alphabets,numbers and spaces. Maximum allowed length: 30 characters">
+				<f:validateLength maximum="30"></f:validateLength>
+				<f:validateRegex pattern="[ A-Za-z0-9]*"></f:validateRegex>
+			</h:inputText>
+			<h:message for="streetAddress" class="error" />
+			
+			<h:outputLabel value="City*:" />
+			<h:inputText id="city" value="#{Student.city}" required="true" requiredMessage="Required Field."
+			validatorMessage="Only alphabets are allowed">
+				<f:validateRegex pattern="[A-Za-z]*"></f:validateRegex>
+			</h:inputText>
+			<h:message for="city" class="error" />
+			
+			<h:outputLabel value="State*:" />
+			<h:inputText id="state" value="#{Student.state}" required="true" requiredMessage="Required Field."
+			validatorMessage="Only alphabets are allowed">
+				<f:validateRegex pattern="[A-Za-z]*"></f:validateRegex>
+			</h:inputText>
+			<h:message for="state" class="error" />
+			
+			<h:outputLabel value="Zip*:" />
+			<h:inputText id="zip" value="#{Student.zip}" required="true" requiredMessage="Required Field."
+			validatorMessage="Only numbers are allowed and should exactly contain 5 digits">
+				<f:validateLength maximum="5" minimum="5"></f:validateLength>
+				<f:validateRegex pattern="[0-9]*"></f:validateRegex>
+			</h:inputText>
+			<h:message for="zip" class="error" />
+			
+			<h:outputLabel value="Telephone No*:" />
+			<h:inputText id="telephoneNo" value="#{Student.telephoneNo}" required="true" requiredMessage="Required Field."
+			validatorMessage="Should be in the form (xxx)-xxx-xxxx">
+				<f:validateRegex pattern="\(\d{3}\)-\d{3}-\d{4}"></f:validateRegex>
+			</h:inputText>
+			<h:message for="telephoneNo" class="error" />
+			
+		
+			<h:outputLabel value="Email*:" />
+			<h:inputText id="email" value="#{Student.email}" required="true" requiredMessage="Required Field."
+			validatorMessage="Invalid email address.">
+				<f:validateRegex pattern="[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+"></f:validateRegex>
+			</h:inputText>
+			<h:message for="email" class="error" />
+			
+			<h:outputLabel value="Date of Survey*:" />
+			<h:inputText id="dateOfSurvey" value="#{Student.dateOfSurvey}" required="true" requiredMessage="Required Field."
+			validatorMessage="Invalid date. Enter valid date in the form mm/dd/yyyy">
+				<f:validateRegex pattern="(0[1-9]|1[012])\/(0[1-9]|[12][0-9]|3[01])\/(19|20)\d\d"></f:validateRegex>
+			</h:inputText>
+			<h:message for="dateOfSurvey" class="error" />
+			
+			</h:panelGrid>
+			
+			<h:panelGrid columns = "1"  cellpadding = "7" cellspacing = "1" class="tableInside">
+			<h:outputLabel>What do you like most in campus?</h:outputLabel>
+			
+			<h:selectManyCheckbox id="likesCampus" value="#{Student.likesCampus}">
+				<f:selectItem itemValue="Students" itemLabel="Students"></f:selectItem>
+				<f:selectItem itemValue="Location" itemLabel="Location"></f:selectItem>
+				<f:selectItem itemValue="Campus" itemLabel="Campus"></f:selectItem>
+				<f:selectItem itemValue="Atmosphere" itemLabel="Atmosphere"></f:selectItem>
+				<f:selectItem itemValue="Dorm Rooms" itemLabel="Dorm Rooms"></f:selectItem>
+				<f:selectItem itemValue="Sports" itemLabel="Sports"></f:selectItem>
+			</h:selectManyCheckbox>
+			
+			
+			<h:outputLabel>How did you get interest in the university?</h:outputLabel>
+			<h:selectOneRadio id="interestUniversity" value="#{Student.interestUniversity}">
+				<f:selectItem itemValue="Friends" itemLabel="Friends"></f:selectItem>
+				<f:selectItem itemValue="Television" itemLabel="Television"></f:selectItem>
+				<f:selectItem itemValue="Internet" itemLabel="Internet"></f:selectItem>
+				<f:selectItem itemValue="Other" itemLabel="Other"></f:selectItem>
+			</h:selectOneRadio>
+			
+			</h:panelGrid>
+			
+			<h:panelGrid columns = "2"  cellpadding = "7" cellspacing = "1" class="tableInside">
+				<h:outputLabel>Would you like to recommend this school to others?</h:outputLabel>
+				<h:selectOneMenu id="recommendUniversity" value="#{Student.recommendUniversity}">
+					<f:selectItem itemValue="Very Likely" itemLabel="Very Likely"></f:selectItem>
+					<f:selectItem itemValue="Likely" itemLabel="Likely"></f:selectItem>
+					<f:selectItem itemValue="Unlikely" itemLabel="Unlikely"></f:selectItem>
+				</h:selectOneMenu>
+			
+			<h:outputLabel>Raffle (Enter 10 comma separated Numbers):</h:outputLabel>
+			<h:inputText id="raffle" value="#{Student.raffle}"></h:inputText>
+			
+	   		<h:outputLabel>Comments:</h:outputLabel>
+			<h:inputTextarea value="#{Student.comments}"></h:inputTextarea>
+
+			
+			<f:facet name = "footer">
+	      		<h:panelGroup style = "display:block; text-align:center">
+	      			<h:button  value="cancel"></h:button>
+	         		<h:commandButton action="#{Student.submitSurvey}" style="margin-left: 20px" id = "submit" value = "Submit" />
+	      		</h:panelGroup>
+	   		</f:facet>
+	   		
+	   		</h:panelGrid>
+		
+	</h:form>
+</div>
+</h:body>
+</html>

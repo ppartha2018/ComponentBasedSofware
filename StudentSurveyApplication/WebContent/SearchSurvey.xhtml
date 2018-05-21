@@ -1,0 +1,85 @@
+<!--
+Page to display the survey form. The fields will be validated upon submission and recored will be saved.
+Futher, based on raffle field winner will be decided.
+Author: Prasanna Venkatesh Parthasarathy
+ -->
+<html xmlns="http://www.w3.org/1999/html" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Survey Form</title>
+<style type="text/css">
+.heading, .links
+{
+	width: 700px;
+	margin: 0px auto;
+	border-bottom: 1px solid gray;
+	margin-bottom: 20px;
+}
+.error
+{
+	color: red;
+	font-style: italic;
+	font-size: 12px;
+}
+.tableInside
+{
+}
+
+.ui-panelgrid td, .ui-panelgrid tr
+{
+    border-style: none !important;
+    font-size: 14px;
+}
+</style>
+</h:head>
+<h:body>
+<div class="heading">
+<h2> Survey search Form: </h2>
+</div>
+<div class="links">
+
+	<h:form id="searchForm">
+		<p:panelGrid columns = "3" style="border: 0px;">
+		
+			<p:outputLabel for="firstName" value="First Name:"></p:outputLabel>
+			
+			<p:inputText id="firstName" value="#{SearchBean.firstName}">
+			</p:inputText>
+			<p:message for="firstName"></p:message>
+			
+			<p:outputLabel for="lastName" value="Last Name:"></p:outputLabel>
+			<p:inputText id="lastName" value="#{SearchBean.lastName}">
+			</p:inputText>
+			<p:message for="lastName" />
+			
+			<p:outputLabel for="city" value="City:" ></p:outputLabel>
+			<p:selectOneMenu id="city" value="#{SearchBean.city}">
+				<f:selectItem itemValue="" itemLabel="Please Select"></f:selectItem>
+				<f:selectItem itemValue="Alexandria" itemLabel="Alexandria"></f:selectItem>
+				<f:selectItem itemValue="Fairfax" itemLabel="Fairfax"></f:selectItem>
+				<f:selectItem itemValue="Tysons Corner" itemLabel="Tysons Corner"></f:selectItem>
+				<f:selectItem itemValue="Ashburn" itemLabel="Ashburn"></f:selectItem>
+			</p:selectOneMenu>
+			<p:message for="city"/>
+			
+			<p:outputLabel for="state" value="State:" ></p:outputLabel>
+			<p:selectOneMenu id="state" value="#{SearchBean.state}">
+				<f:selectItem itemValue="" itemLabel="Please Select"></f:selectItem>
+				<f:selectItem itemValue="VA" itemLabel="VA"></f:selectItem>
+				<f:selectItem itemValue="MD" itemLabel="MD"></f:selectItem>
+			</p:selectOneMenu>
+			<p:message for="state" />
+			
+			
+			<f:facet name = "footer">
+	      		<h:panelGroup style = "display:block; text-align:center">
+	      			<p:button  value="cancel"></p:button>
+	         		<p:commandButton ajax="false" action="#{SearchBean.searchSurvey}" style="margin-left: 20px" id = "submit" value = "Search" ></p:commandButton>
+	      		</h:panelGroup>
+	   		</f:facet>
+	   		
+	   		</p:panelGrid>
+		
+	</h:form>
+</div>
+</h:body>
+</html>

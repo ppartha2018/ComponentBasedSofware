@@ -1,0 +1,51 @@
+<!--
+Page for winner acknowledgement after submitting survey.
+Author: Prasanna Venkatesh Parthasarathy
+ -->
+
+<html xmlns="http://www.w3.org/1999/html" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Survey Form</title>
+<style type="text/css">
+.heading, .links
+{
+	width: 600px;
+	margin: 0px auto;
+	border: 1px solid gray;
+	margin-bottom: 20px;
+	margin-top: 100px;
+	padding: 5px;
+}
+.error
+{
+	color: red;
+	font-style: italic;
+	font-size: 12px;
+}
+.winner
+{
+	color: green;
+	font-style: italic;
+	font-size: 20px;
+}
+
+</style>
+</h:head>
+<h:body>
+	<div class="heading">
+		<h4> Thanks for participating in the survey! Your information is Saved. </h4>
+		<h:panelGrid columns="2">
+			<h:outputText value="Student Name:" />
+			#{Student.firstName} #{Student.lastName}
+			<h:outputText value="Mean (Raffle):" />
+			<h:outputText value="#{Student.winningResult.mean}" />
+			<h:outputText value="Standard Deviation (Raffle):" />
+			<h:outputText value="#{Student.winningResult.standardDeviation}" />
+		</h:panelGrid>
+		<div class="winner">
+			<p>Congratulations! You won the Raffle!! You will get a free movie ticket.</p>
+		</div>
+		<a href="index.xhtml">Home</a>
+	</div>
+</h:body>
+</html>
